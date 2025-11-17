@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Button with Color Change</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #a24b4b 100%);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .content-div {
+            width: 300px;
+            height: 150px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            transition: all 0.5s ease;
+        }
+
+        .content-div.slide {
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-button {
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #667eea;
+            color: white;
+        }
+
+        .slide-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .slide-button:active {
+            transform: scale(0.95);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .color-info {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sliding Button Demo</h1>
+        <div class="content-div" id="contentDiv">
+            Click the button to slide and change color!
+        </div>
+        <button class="slide-button" id="slideButton">Slide & Change Color</button>
+        <div class="color-info" id="colorInfo">Ready to go!</div>
+    </div>
+
+    <script>
+        const button = document.getElementById('slideButton');
+        const contentDiv = document.getElementById('contentDiv');
+        const colorInfo = document.getElementById('colorInfo');
+
+      
+        const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#43e97b', '#fa709a', '#fee140'];
+        let colorIndex = 0;
+
+        button.addEventListener('click', function() {
+            contentDiv.classList.remove('slide');
+            
+            void contentDiv.offsetWidth;
+            
+            contentDiv.classList.add('slide');
+            
+            colorIndex = (colorIndex + 1) % colors.length;
+            contentDiv.style.backgroundColor = colors[colorIndex];
+            
+            colorInfo.textContent = `Current color: ${colors[colorIndex]}`;
+        });
+    </script>
+</body>
+</html>
